@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface DonorRepository extends JpaRepository<Donor, String> {
-    List<Donor> findByBloodGroup(String bloodGroup); // Custom query for blood group
+    List<Donor> findByBloodGroup(String bloodGroup);
 }

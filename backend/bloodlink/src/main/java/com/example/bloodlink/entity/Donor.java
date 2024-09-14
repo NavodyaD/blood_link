@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Donor {
     @Id
-    private String nic; // NIC as the primary key
+    private String nic;
     private String contactNumber;
     private String bloodGroup;
     private int bloodAmount;

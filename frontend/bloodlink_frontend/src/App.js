@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './App.css';
 
 const App = () => {
     const [donors, setDonors] = useState([]);
@@ -67,10 +68,11 @@ const App = () => {
     };
 
     return (
-        <div>
+        <div className="mainConatiner">
             <h1>Blood Bank Management</h1>
-
-            <form onSubmit={handleSubmit}>
+            <div className="addFormDiv">
+            <form className="addForm" onSubmit={handleSubmit}>
+                <div className="textField">
                 <input
                     type="text"
                     placeholder="NIC"
@@ -78,6 +80,8 @@ const App = () => {
                     onChange={(e) => setNic(e.target.value)}
                     required
                 />
+                </div>
+                <div className="textField">
                 <input
                     type="text"
                     placeholder="Contact Number"
@@ -85,6 +89,8 @@ const App = () => {
                     onChange={(e) => setContactNumber(e.target.value)}
                     required
                 />
+                </div>
+                <div className="textField">
                 <input
                     type="text"
                     placeholder="Blood Group"
@@ -92,6 +98,8 @@ const App = () => {
                     onChange={(e) => setBloodGroup(e.target.value)}
                     required
                 />
+                </div>
+                <div className="textField">
                 <input
                     type="number"
                     placeholder="Blood Amount"
@@ -99,8 +107,10 @@ const App = () => {
                     onChange={(e) => setBloodAmount(e.target.value)}
                     required
                 />
+                </div>
                 <button type="submit">{editNic ? "Update Donor" : "Add Donor"}</button>
             </form>
+            </div>
 
             <div>
                 <h2>Filter by Blood Group</h2>
