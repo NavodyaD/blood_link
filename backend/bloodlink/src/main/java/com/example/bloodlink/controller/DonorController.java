@@ -5,12 +5,13 @@ import com.example.bloodlink.repo.DonorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.HashMap;
 import java.util.List;
-
-
+import java.util.Map;
 
 
 @RestController
@@ -44,9 +45,9 @@ public class DonorController {
     @PutMapping("/{nic}")
     public ResponseEntity<Donor> updateDonor(@PathVariable String nic, @RequestBody Donor donorDetails) {
         Donor donor = donorRepository.findById(nic)
-                .orElseThrow(() -> new ResourceNotFoundException("Donor not found with NIC: " + nic));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Donor not found with NIC: " + nic));
 
-        donor.setContactNumber(donorDetails.s());
+        donor.setContactNumber(donorDetails.getContactNumber());
         donor.setBloodGroup(donorDetails.getBloodGroup());
         donor.setBloodAmount(donorDetails.getBloodAmount());
 
@@ -58,7 +59,7 @@ public class DonorController {
     @DeleteMapping("/{nic}")
     public ResponseEntity<Map<String, Boolean>> deleteDonor(@PathVariable String nic) {
         Donor donor = donorRepository.findById(nic)
-                .orElseThrow(() -> new ResourceNotFoundException("Donor not found with NIC: " + nic));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Donor not found with NIC: " + nic));
 
         donorRepository.delete(donor);
         Map<String, Boolean> response = new HashMap<>();
