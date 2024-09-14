@@ -30,7 +30,7 @@ const App = () => {
                 .catch(error => console.log(error));
         } else {
             // Create donor
-            axios.post("http://localhost:8080/api/donors", donor)
+            axios.post("http://localhost:8080/api/donors/createdonor", donor)
                 .then(response => setDonors([...donors, response.data]))
                 .catch(error => console.log(error));
         }
@@ -71,8 +71,11 @@ const App = () => {
         <div className="mainConatiner">
             <h1>Blood Bank Management</h1>
             <div className="addFormDiv">
+                
             <form className="addForm" onSubmit={handleSubmit}>
+            <h2>Add New Donation</h2>
                 <div className="textField">
+                    <p>NIC</p>
                 <input
                     type="text"
                     placeholder="NIC"
@@ -82,6 +85,7 @@ const App = () => {
                 />
                 </div>
                 <div className="textField">
+                    <p>Conact Number</p>
                 <input
                     type="text"
                     placeholder="Contact Number"
@@ -91,6 +95,7 @@ const App = () => {
                 />
                 </div>
                 <div className="textField">
+                    <p>Blood Group</p>
                 <input
                     type="text"
                     placeholder="Blood Group"
@@ -100,6 +105,7 @@ const App = () => {
                 />
                 </div>
                 <div className="textField">
+                    <p>Blood Amount</p>
                 <input
                     type="number"
                     placeholder="Blood Amount"
@@ -108,23 +114,27 @@ const App = () => {
                     required
                 />
                 </div>
-                <button type="submit">{editNic ? "Update Donor" : "Add Donor"}</button>
+                <button className="button" type="submit">{editNic ? "Update Donor" : "Add Donor"}</button>
             </form>
             </div>
 
-            <div>
+            <div className="filter">
                 <h2>Filter by Blood Group</h2>
+                <div className="textField">
+                    <p>Enter Blood Group</p>
+                    <br />
                 <input
                     type="text"
                     placeholder="Blood Group"
                     value={filterBloodGroup}
                     onChange={(e) => setFilterBloodGroup(e.target.value)}
                 />
-                <button onClick={handleFilter}>Filter</button>
+                </div>
+                <button className="button" onClick={handleFilter}>Filter</button>
             </div>
 
             <h2>Donors List</h2>
-            <ul>
+            <ul className="donorslist">
                 {donors.map((donor) => (
                     <li key={donor.nic}>
                         {donor.nic} - {donor.contactNumber} - {donor.bloodGroup} - {donor.bloodAmount}ml

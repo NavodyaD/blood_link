@@ -1,15 +1,121 @@
-.mainConatiner{
-  align-content: center;
-  width: 100%;
-  text-align: center;
-  margin-top: 35px;
-  
+/* General Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.addFormDiv{
+.mainConatiner {
+  text-align: center;
+  padding: 20px;
+  width: 800px;
+  max-width: 800px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
 
-  width: 60%;
-  border-color: black;
-  border-width: 3px;
-  background-color: grey;
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.addFormDiv {
+  margin-bottom: 20px;
+}
+
+.addForm {
+  padding: 20px 50px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.textField {
+  margin-bottom: 15px;
+}
+
+.textField p {
+  margin: 0;
+  font-weight: bold;
+  color: rgb(39, 39, 39);
+  text-align: left;
+}
+
+.textField input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.button {
+  width: 30%;
+  background-color: #299958;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #185a33;
+}
+
+.filter {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #ffffff;
+  padding-left: 35px;
+  padding-right: 60px;
+  padding-bottom: 25px;
+}
+
+.donorslist {
+  list-style-type: none;
+  padding: 0;
+}
+
+.donorslist li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.donorslist li button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.donorslist li button:hover {
+  background-color: #218838;
+}
+
+.donorslist li button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+.donorslist li button:nth-child(2):hover {
+  background-color: #c82333;
 }
