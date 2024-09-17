@@ -34,7 +34,7 @@ public class DonorService {
 
     public Donor updateDonor(String nic, Donor donorDetails) {
         Donor donor = donorRepository.findById(nic)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Donor not found with NIC: " + nic));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot Find Donor with NIC: " + nic));
 
         //donor.setContactNumber(donorDetails.getContactNumber());
         //donor.setBloodGroup(donorDetails.getBloodGroup());
@@ -45,7 +45,7 @@ public class DonorService {
 
     public void deleteDonor(String nic) {
         Donor donor = donorRepository.findById(nic)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Donor not found with NIC: " + nic));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot Find Donor with NIC: " + nic));
         donorRepository.delete(donor);
     }
 }

@@ -13,26 +13,36 @@ const App = () => {
 
     // Fetch all donors
     useEffect(() => {
-        axios.get("http://localhost:8080/api/donors")
-            .then((response) => setDonors(response.data))
-            .catch((error) => console.log(error));
+        const fetchDonors = async () => {
+            try {
+                const response = await axios.get("http://localhost:8080/api/donors");
+                setDonors(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
+        fetchDonors();
     }, []);
+    
 
     // Add or Update Donor
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const donor = { nic, contactNumber, bloodGroup, bloodAmount };
-        
-        if (editNic) {
-            // Update donor
-            axios.put(`http://localhost:8080/api/donors/${editNic}`, donor)
-                .then(() => setDonors(donors.map(d => d.nic === editNic ? donor : d)))
-                .catch(error => console.log(error));
-        } else {
-            // Create donor
-            axios.post("http://localhost:8080/api/donors/createdonor", donor)
-                .then(response => setDonors([...donors, response.data]))
-                .catch(error => console.log(error));
+
+        try {
+            if (editNic) {
+                // Update donor
+                await axios.put(`http://localhost:8080/api/donors/${editNic}`, donor);
+                setDonors(donors.map(donorItem => donorItem.nic === editNic ? donor : donorItem));
+            } else {
+                // Create donor
+                const response = await axios.post("http://localhost:8080/api/donors/createdonor", donor);
+                setDonors([...donors, response.data]);
+            }
+        } catch (error) {
+            console.error(error);
         }
 
         // Clear the form
@@ -43,12 +53,17 @@ const App = () => {
         setEditNic("");
     };
 
+
     // Filter donors by blood group
-    const handleFilter = () => {
-        axios.get(`http://localhost:8080/api/donors/bloodgroup/${filterBloodGroup}`)
-            .then((response) => setDonors(response.data))
-            .catch((error) => console.log(error));
+    const handleFilter = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/donors/bloodgroup/${filterBloodGroup}`);
+            setDonors(response.data);
+        } catch (error) {
+            console.error(error);
+        }
     };
+    
 
     // Set the donor to be edited
     const handleEdit = (nic) => {
@@ -60,12 +75,15 @@ const App = () => {
         setEditNic(nic);
     };
 
-    // Delete donor
-    const handleDelete = (nic) => {
-        axios.delete(`http://localhost:8080/api/donors/${nic}`)
-            .then(() => setDonors(donors.filter(d => d.nic !== nic)))
-            .catch(error => console.log(error));
+    const handleDelete = async (nic) => {
+        try {
+            await axios.delete(`http://localhost:8080/api/donors/${nic}`);
+            setDonors(donors.filter(donorItem => donorItem.nic !== nic));
+        } catch (error) {
+            console.error(error);
+        }
     };
+    
 
     return (
         <div className="mainConatiner">
@@ -138,8 +156,8 @@ const App = () => {
                 {donors.map((donor) => (
                     <li key={donor.nic}>
                         {donor.nic} - {donor.contactNumber} - {donor.bloodGroup} - {donor.bloodAmount}ml
-                        <button onClick={() => handleEdit(donor.nic)}>Edit</button>
-                        <button onClick={() => handleDelete(donor.nic)}>Delete</button>
+                        <button onClick={() => handleEdit(donor.nic)}>Edit Donor</button>
+                        <button onClick={() => handleDelete(donor.nic)}>Delete Donor</button>
                     </li>
                 ))}
             </ul>
